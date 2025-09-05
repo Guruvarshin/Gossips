@@ -1,0 +1,32 @@
+<h1>Gossips</h1>
+<div class="row">
+    {{#each gossips}}
+    <div class="col s12 m4">
+        <div class="card">
+            <div class="card-image">
+                {{{editIcon user ../user _id}}}
+            </div>
+            <div class="card-content center-align">
+                <h5>{{title}}</h5>
+                <p>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</p>
+                <p>Status: <span class="status">{{status}}</span></p>
+                <p>{{stripTags (truncate body 150)}}</p>
+                <br />
+                <div class="chip">
+                    <img src="{{user.image}}" alt="User Avatar"/>
+                    <a href="/gossips/user/{{user._id}}">{{user.displayName}}</a>
+                </div>
+            </div>
+            <div class="card-action center-align">
+                <a href="/gossips/{{_id}}" class="btn">Read More</a>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <p>No Gossips today</p>
+    {{/each}}
+
+</div>
+    <div class="center">
+    <a href="/dashboard" class="btn orange">Go to Dashboard</a>
+    </div>

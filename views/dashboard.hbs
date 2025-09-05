@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome {{name}}</h1>
+    <p>Here are the Gossips</p>
+    {{#if gossips}}
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Created At</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each gossips}}
+            <tr>
+                <td><a href="/gossips/{{_id}}">{{this.title}}</a></td>
+                <td>{{formatDate this.createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
+                <td><span class="dash-status">{{this.status}}</span></td>
+                <td>
+                    <a href="/gossips/edit/{{this._id}}" class="btn blue"><i class="fas fa-edit"></i></fa-edit></a>
+                    <form action="/gossips/{{this._id}}" method="POST" style="display:inline;" id="delete-form">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn red" onclick="return confirm('Are you sure?');"><i class="fas fa-trash-alt"></i></button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p>No Gossips today</p>
+    {{/if}}
+</body>
+</html>
